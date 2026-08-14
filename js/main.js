@@ -490,3 +490,103 @@ document.documentElement.classList.add('js');
     });
   }
 })();
+
+/* ===== v1.9: portfolio pack (cursor, filmstrip clone, scramble, spotlight) ===== */
+(function () {
+  var reduceMotion = window.matchMedia &&
+    window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var isTouch = window.matchMedia &&
+    window.matchMedia('(hover: none)').matches;
+  var finePointer = window.matchMedia && window.matchMedia('(pointer: fine)').matches;
+
+  // --- Filmstrip: duplicate content for seamless -50% loop ---
+  // (gallery renders on DOMContentLoaded, so clone after that)
+  function cloneFilmstrip() {
+    var film = document.getElementById('photo-gallery');
+    if (!film || !film.classList.contains('filmstrip') || film.hasAttribute('data-cloned')) return;
+    if (!film.querySelector('figure')) return; // not rendered yet
+    var clone = film.cloneNode(true);
+    clone.removeAttribute('id');
+    clone.querySelectorAll('.reveal').forEach(function (f) {
+      f.classList.remove('reveal');
+      f.classList.add('is-visible');
+    });
+    film.appendChild(clone);
+    film.setAttribute('data-cloned', '1');
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', cloneFilmstrip);
+  } else {
+    cloneFilmstrip();
+  }
+
+  // --- Custom cursor (desktop pointer only) ---
+  if (!isTouch && finePointer) {
+    document.documentElement.classList.add('custom-cursor');
+    var dot = document.createElement('div');
+    dot.className = 'cursor-dot';
+    var ring = document.createElement('div');
+    ring.className = 'cursor-ring';
+    document.body.appendChild(dot);
+    document.body.appendChild(ring);
+    var tx = -100, ty = -100, dx = -100, dy = -100, rx = -100, ry = -100;
+    document.addEventListener('mousemove', function (e) {
+      tx = e.clientX; ty = e.clientY;
+    }, { passive: true });
+    var hoverSel = 'a, button, .btn, .card, .campus-card, .past-card, .partner, .team-card, .how-item, .gallery figure';
+    document.addEventListener('mouseover', function (e) {
+      if (e.target.closest && e.target.closest(hoverSel)) ring.classList.add('grow');
+    }, { passive: true });
+    document.addEventListener('mouseout', function (e) {
+      if (e.target.closest && e.target.closest(hoverSel)) ring.classList.remove('grow');
+    }, { passive: true });
+    (function cursorLoop() {
+      requestAnimationFrame(cursorLoop);
+      dx += (tx - dx) * 0.45;
+      dy += (ty - dy) * 0.45;
+      rx += (tx - rx) * (reduceMotion ? 1 : 0.14);
+      ry += (ty - ry) * (reduceMotion ? 1 : 0.14);
+      dot.style.transform = 'translate(' + (dx - 4) + 'px,' + (dy - 4) + 'px)';
+      ring.style.transform = 'translate(' + (rx - 18) + 'px,' + (ry - 18) + 'px)';
+    })();
+  }
+
+  // --- Nav link text scramble on hover ---
+  if (!reduceMotion && finePointer) {
+    document.querySelectorAll('.main-nav a').forEach(function (a) {
+      var orig = a.textContent;
+      var anim = null;
+      var chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ#*%&@$';
+      a.addEventListener('mouseenter', function () {
+        if (anim) cancelAnimationFrame(anim);
+        var t0 = performance.now(), dur = 450;
+        (function frame(ts) {
+          var p = (ts - t0) / dur;
+          if (p >= 1) { a.textContent = orig; return; }
+          var shown = Math.floor(p * orig.length);
+          var out = orig.slice(0, shown);
+          for (var i = shown; i < orig.length; i++) {
+            out += chars[Math.floor(Math.random() * chars.length)];
+          }
+          a.textContent = out;
+          anim = requestAnimationFrame(frame);
+        })(t0);
+      });
+      a.addEventListener('mouseleave', function () {
+        if (anim) cancelAnimationFrame(anim);
+        a.textContent = orig;
+      });
+    });
+  }
+
+  // --- Card spotlight: track mouse per card ---
+  if (!reduceMotion && finePointer) {
+    document.querySelectorAll('.card, .partner, .team-card, .past-card').forEach(function (c) {
+      c.addEventListener('mousemove', function (e) {
+        var r = c.getBoundingClientRect();
+        c.style.setProperty('--mx', Math.round(e.clientX - r.left) + 'px');
+        c.style.setProperty('--my', Math.round(e.clientY - r.top) + 'px');
+      });
+    });
+  }
+})();
