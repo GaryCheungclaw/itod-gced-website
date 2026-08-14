@@ -82,5 +82,44 @@ document.addEventListener('DOMContentLoaded', function () {
       fig.innerHTML = '<img src="' + p[0] + '" alt="' + p[1] + '" loading="lazy"><figcaption>' + p[1] + '</figcaption>';
       gallery.appendChild(fig);
     });
+
+    // From AISG WeChat archives (2022–2026)
+    var archive = [
+      ['img/s1_01.jpg', 'Autism center visit — from our 2022 club report'],
+      ['img/s1_02.jpg', 'Autism center visit — from our 2022 club report'],
+      ['img/s1_03.jpg', 'Autism center visit — from our 2022 club report'],
+      ['img/s1_04.jpg', 'Autism center visit — from our 2022 club report'],
+      ['img/s1_05.jpg', 'Autism center visit — from our 2022 club report'],
+      ['img/s1_06.jpg', 'Canvas art project with the autism center (2022)'],
+      ['img/s1_07.jpg', 'Canvas art project with the autism center (2022)'],
+      ['img/s1_08.jpg', 'Canvas art project with the autism center (2022)'],
+      ['img/s1_09.jpg', 'Canvas art project with the autism center (2022)'],
+      ['img/s1_10.jpg', 'The canvas, painted together (2022)'],
+      ['img/s1_11.jpg', 'The canvas, painted together (2022)'],
+      ['img/s1_12.jpg', 'The canvas, painted together (2022)'],
+      ['img/s1_13.jpg', 'Planning what is next for the club (2022)'],
+      ['img/s4_43.jpg', 'Autism Center Visit — Nov 2023'],
+      ['img/s4_44.jpg', 'Autism Center Visit — Nov 2023'],
+      ['img/s4_45.jpg', 'Autism Center Visit — Nov 2023'],
+      ['img/s4_46.jpg', 'Autism Center Visit — Nov 2023'],
+      ['img/s4_47.jpg', 'Autism Center Visit — Nov 2023'],
+      ['img/s5_63.jpg', 'Yuexiu Park expedition — Dec 2023'],
+      ['img/s5_64.jpg', 'Yuexiu Park expedition — Dec 2023'],
+      ['img/s5_65.jpg', 'Yuexiu Park expedition — Dec 2023'],
+      ['img/s5_66.jpg', 'Yuexiu Park expedition — Dec 2023'],
+      ['img/s7_21.jpg', 'Impact Starts Here — GCED service coordinators (Aug 2026)'],
+      ['img/s7_22.jpg', 'Impact Starts Here — GCED service coordinators (Aug 2026)'],
+      ['img/s7_23.jpg', 'Impact Starts Here — GCED service coordinators (Aug 2026)'],
+      ['img/s7_24.jpg', 'Impact Starts Here — GCED service coordinators (Aug 2026)'],
+      ['img/s7_25.jpg', 'Impact Starts Here — GCED service coordinators (Aug 2026)'],
+      ['img/s7_26.jpg', 'Impact Starts Here — GCED service coordinators (Aug 2026)'],
+      ['img/s2_04.jpg', 'Our club in AISG\'s GCED overview (2023)'],
+      ['img/s3_03.jpg', 'From the Class of 2023 alumni spotlight — co-founder Thomas Huo']
+    ];
+    archive.forEach(function (p) {
+      var fig = document.createElement('figure');
+      fig.innerHTML = '<img src="' + p[0] + '" alt="' + p[1] + '" loading="lazy"><figcaption>' + p[1] + '</figcaption>';
+      gallery.appendChild(fig);
+    });
   }
 });

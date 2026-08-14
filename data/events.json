@@ -44,9 +44,33 @@
   "pastEvents": [
     {
       "year": "2026",
+      "name": "ImpactGZ Service-Learning Conference",
+      "desc": "GCED service coordinators teamed up at AISG's Impact Starts Here conference — brainstorming ideas and building action plans.",
+      "photo": "img/s7_21.jpg"
+    },
+    {
+      "year": "2026",
       "name": "Lingnan Visit — Science Park Campus",
       "desc": "We hosted 20 autistic students from Lingnan at our Science City campus for a tour, art collaboration and performances.",
       "photo": "img/wx_05.jpg"
+    },
+    {
+      "year": "2023",
+      "name": "Autism Center Visit",
+      "desc": "A weekend visit to a local autism center — games, art and time spent together.",
+      "photo": "img/s4_45.jpg"
+    },
+    {
+      "year": "2023",
+      "name": "Yuexiu Park Expedition",
+      "desc": "An outdoor expedition with our friends from the autism community at Yuexiu Park.",
+      "photo": "img/s5_65.jpg"
+    },
+    {
+      "year": "2022",
+      "name": "Canvas Art Project",
+      "desc": "A collaborative canvas painted with the autism center — one picture, painted together.",
+      "photo": "img/s1_10.jpg"
     },
     {
       "year": "2025–2026",
