@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Activities | Itod GCED — Indifferent to Difference</title>
+  <meta name="description" content="Upcoming events and past activities of Itod GCED, AISG's service club for autism awareness in Guangzhou.">
+  <link rel="icon" type="image/png" href="img/logo_blue.png">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="index.html">
+        <img class="brand-logo" src="img/logo_white.png" alt="Itod GCED logo">
+        <span>
+          <span class="brand-name">Itod GCED</span><br>
+          <span class="brand-sub">Indifferent to Difference</span>
+        </span>
+      </a>
+      <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">☰</button>
+      <nav class="main-nav" aria-label="Main navigation">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="activities.html">Activities</a></li>
+          <li><a href="awareness.html">ASD Awareness</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="page-hero">
+      <div class="container">
+        <h1>Activities</h1>
+        <p>This year's calendar and highlights from past years. All service events count toward CAS hours.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <h2>Upcoming Events · 2026–2027</h2>
+        <p class="section-intro">Three on-campus events and two with our partner schools. Dates and campuses will be confirmed and updated here.</p>
+        <div class="card-grid" id="upcoming-events">
+          <!-- rendered from data/events.json -->
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-alt">
+      <div class="container">
+        <h2>Past Highlights</h2>
+        <p class="section-intro">A look back at what we've done — real photos from real trips and booths.</p>
+        <div class="gallery" id="past-gallery">
+          <!-- rendered from data/events.json -->
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="card" style="max-width:640px;margin:0 auto;text-align:center;">
+          <h3>💙 Why We Do This</h3>
+          <p style="font-size:16px;">"We are not just a fundraising club. We go to the front line and interact with autistic individuals face to face — that's what makes us different."</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <h4>Itod GCED</h4>
+          <p style="font-size:14px;">Indifferent to Difference — AISG GCED service club supporting local autistic communities in Guangzhou.</p>
+        </div>
+        <div>
+          <h4>Explore</h4>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="awareness.html">ASD Awareness</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Contact</h4>
+          <ul>
+            <li>Faculty Coordinator: Mr. Alex Bukenya</li>
+            <li>Student Coordinators: Gary Cheung &amp; Rex Li</li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2026–2027 Itod GCED · AISG</span>
+        <span>Made with care · ASD-friendly design</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script>
+    fetch('data/events.json')
+      .then(function (r) { return r.json(); })
+      .then(function (data) {
+        var up = document.getElementById('upcoming-events');
+        if (up) {
+          data.events.forEach(function (ev) {
+            var div = document.createElement('div');
+            div.className = 'card';
+            div.innerHTML =
+              '<div class="event-date" style="font-size:13px;font-weight:700;color:var(--blue-dark);text-transform:uppercase;letter-spacing:0.5px;">' + ev.date + '</div>' +
+              '<h3 style="margin-top:6px;">' + ev.name + '</h3>' +
+              '<div style="font-size:14px;color:var(--ink-soft);margin:4px 0;">📍 ' + ev.campus + ' · ' + ev.type + '</div>' +
+              '<p>' + ev.desc + '</p>';
+            up.appendChild(div);
+          });
+        }
+        var gal = document.getElementById('past-gallery');
+        if (gal) {
+          data.pastEvents.forEach(function (ev) {
+            var fig = document.createElement('figure');
+            var img = document.createElement('img');
+            img.src = ev.photo;
+            img.alt = ev.name + ' — ' + ev.desc;
+            img.loading = 'lazy';
+            var cap = document.createElement('figcaption');
+            cap.innerHTML = '<strong>' + ev.year + ' · ' + ev.name + '</strong><br>' + ev.desc;
+            fig.appendChild(img);
+            fig.appendChild(cap);
+            gal.appendChild(fig);
+          });
+        }
+      })
+      .catch(function (e) {
+        // fallback content
+        var up = document.getElementById('upcoming-events');
+        if (up) {
+          var fallback = [
+            ['Family Fun Day — Charity Booth', 'Our first on-campus fundraising event.'],
+            ['ImpactGZ Service Learning Summit', 'Partner school booths and workshops.'],
+            ['Lingnan Campus Visit', 'Inclusive activities with autistic students.'],
+            ['Holiday Bazaar', 'Year-end fundraising market.'],
+            ['International Day', 'Campus awareness day.']
+          ];
+          fallback.forEach(function (ev) {
+            var div = document.createElement('div');
+            div.className = 'card';
+            div.innerHTML = '<h3>' + ev[0] + '</h3><p>' + ev[1] + '</p>';
+            up.appendChild(div);
+          });
+        }
+      });
+  </script>
+</body>
+</html>

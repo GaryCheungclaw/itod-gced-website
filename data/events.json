@@ -1,0 +1,64 @@
+{
+  "events": [
+    {
+      "name": "Family Fun Day — Charity Booth",
+      "date": "Semester 1 · TBD",
+      "type": "On-campus · Fundraising",
+      "campus": "Science City or Ersha Island",
+      "desc": "Our first on-campus event of the year: a games booth raising funds for local ASD programs.",
+      "status": "upcoming"
+    },
+    {
+      "name": "ImpactGZ Service Learning Summit",
+      "date": "Semester 1 · TBD",
+      "type": "Off-campus · Partnership",
+      "campus": "Partner school",
+      "desc": "We visit our partner school to run translation booths and lead inclusive workshops.",
+      "status": "upcoming"
+    },
+    {
+      "name": "Lingnan Campus Visit",
+      "date": "Semester 1 · TBD",
+      "type": "Off-campus · Inclusive activities",
+      "campus": "Partner school",
+      "desc": "Full-team visit to Lingnan — cooking, sports and games with autistic students.",
+      "status": "upcoming"
+    },
+    {
+      "name": "Holiday Bazaar",
+      "date": "Semester 2 · TBD",
+      "type": "On-campus · Fundraising",
+      "campus": "Science City or Ersha Island",
+      "desc": "Year-end fundraising market with games and student-made goods.",
+      "status": "upcoming"
+    },
+    {
+      "name": "International Day",
+      "date": "Semester 2 · TBD",
+      "type": "On-campus · Awareness",
+      "campus": "Science City or Ersha Island",
+      "desc": "Campus-wide awareness day celebrating neurodiversity and inclusion.",
+      "status": "upcoming"
+    }
+  ],
+  "pastEvents": [
+    {
+      "year": "2025–2026",
+      "name": "ImpactGZ Summit",
+      "desc": "Translation booths and inclusive workshops with our partner organizations.",
+      "photo": "img/image10.jpg"
+    },
+    {
+      "year": "2025–2026",
+      "name": "Lingnan Visit",
+      "desc": "Cooking, sports and games with autistic students at our partner school.",
+      "photo": "img/image1.jpg"
+    },
+    {
+      "year": "2025–2026",
+      "name": "Holiday Bazaar",
+      "desc": "Fundraising games and student-made goods for local ASD support programs.",
+      "photo": "img/image8.jpg"
+    }
+  ]
+}

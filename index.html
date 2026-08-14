@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Itod GCED | Indifferent to Difference — AISG</title>
+  <meta name="description" content="Itod GCED is an AISG service club supporting local autistic communities in Guangzhou through hands-on service and campus awareness.">
+  <link rel="icon" type="image/png" href="img/logo_blue.png">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="index.html">
+        <img class="brand-logo" src="img/logo_white.png" alt="Itod GCED logo">
+        <span>
+          <span class="brand-name">Itod GCED</span><br>
+          <span class="brand-sub">Indifferent to Difference</span>
+        </span>
+      </a>
+      <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">☰</button>
+      <nav class="main-nav" aria-label="Main navigation">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="activities.html">Activities</a></li>
+          <li><a href="awareness.html">ASD Awareness</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-bg" style="background-image:url('img/image1.jpg');"></div>
+      <div class="container">
+        <div class="hero-content">
+          <h1>Indifferent to Difference</h1>
+          <p class="lead">Itod GCED · AISG Service Club — supporting local autistic communities in Guangzhou through hands-on service and campus advocacy.</p>
+          <div class="hero-actions">
+            <a class="btn btn-light" href="about.html">Learn About Us</a>
+            <a class="btn btn-outline" href="activities.html">Upcoming Events</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="section-head text-center">
+          <h2>What We Stand For</h2>
+          <p class="section-intro" style="margin-left:auto;margin-right:auto;">We don't just fundraise — we go to the front line and interact with autistic individuals face to face.</p>
+        </div>
+        <div class="card-grid">
+          <div class="card pillar">
+            <div class="card-icon">🤝</div>
+            <h3>Direct Service</h3>
+            <p>Hands-on inclusive activities with autistic students at partner schools — cooking, sports, games and conversation.</p>
+          </div>
+          <div class="card pillar">
+            <div class="card-icon">📣</div>
+            <h3>Campus Awareness</h3>
+            <p>Advocacy on campus through charity booths, events and autism awareness education for the AISG community.</p>
+          </div>
+          <div class="card pillar">
+            <div class="card-icon">🌏</div>
+            <h3>Community Partnership</h3>
+            <p>Long-term partnerships with Lingnan Vocational College and Xin Vocational Training to support local ASD youth.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-alt">
+      <div class="container">
+        <div class="section-head">
+          <h2>This Year's Activities</h2>
+          <p class="section-intro">Five events across the year — three on campus, two with our partner schools.</p>
+        </div>
+        <ol class="timeline" id="event-timeline">
+          <!-- rendered from data/events.json -->
+        </ol>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="quote-block">
+          <p>"Children with autism are like stars hidden behind clouds. With patience, we can clear the mist and hear the unique whispers of their universe."</p>
+          <cite>— Kate Swenson</cite>
+        </div>
+        <div class="text-center">
+          <a class="btn btn-blue" href="awareness.html">Autism Awareness Basics →</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <h4>Itod GCED</h4>
+          <p style="font-size:14px;">Indifferent to Difference — AISG GCED service club supporting local autistic communities in Guangzhou.</p>
+        </div>
+        <div>
+          <h4>Explore</h4>
+          <ul>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="activities.html">Activities</a></li>
+            <li><a href="awareness.html">ASD Awareness</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Contact</h4>
+          <ul>
+            <li>Faculty Coordinator: Mr. Alex Bukenya</li>
+            <li>Student Coordinators: Gary Cheung &amp; Rex Li</li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2026–2027 Itod GCED · AISG</span>
+        <span>Made with care · ASD-friendly design</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script>
+    fetch('data/events.json')
+      .then(function (r) { return r.json(); })
+      .then(function (data) {
+        var list = document.getElementById('event-timeline');
+        if (!list) return;
+        data.events.forEach(function (ev) {
+          var li = document.createElement('li');
+          li.innerHTML =
+            '<div class="event-date">' + ev.date + ' · ' + ev.type + '</div>' +
+            '<div class="event-name">' + ev.name + '</div>' +
+            '<div class="event-meta">📍 ' + ev.campus + '</div>' +
+            '<div class="event-desc">' + ev.desc + '</div>';
+          list.appendChild(li);
+        });
+      })
+      .catch(function () {
+        // static fallback if fetch fails (e.g. opened via file://)
+        var list = document.getElementById('event-timeline');
+        if (!list) return;
+        var fallback = [
+          ['Family Fun Day — Charity Booth', 'Our first on-campus fundraising event of the year.'],
+          ['ImpactGZ Service Learning Summit', 'Visit partner school for booths and workshops.'],
+          ['Lingnan Campus Visit', 'Inclusive activities with autistic students.'],
+          ['Holiday Bazaar', 'Year-end fundraising market.'],
+          ['International Day', 'Campus awareness day for neurodiversity.']
+        ];
+        fallback.forEach(function (ev) {
+          var li = document.createElement('li');
+          li.innerHTML = '<div class="event-name">' + ev[0] + '</div><div class="event-desc">' + ev[1] + '</div>';
+          list.appendChild(li);
+        });
+      });
+  </script>
+</body>
+</html>
