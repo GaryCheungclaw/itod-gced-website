@@ -45,5 +45,20 @@ document.addEventListener('DOMContentLoaded', function () {
       fig.innerHTML = '<img src="' + p[0] + '" alt="' + p[1] + '" loading="lazy"><figcaption>' + p[1] + '</figcaption>';
       gallery.appendChild(fig);
     });
+
+    // Photos from our Lingnan visit at Science Park campus (AISG WeChat article)
+    var more = [
+      ['img/wx_01.jpg', 'Welcoming 20 autistic students from Lingnan to AISG'],
+      ['img/wx_04.jpg', 'Campus tour at Science Park campus'],
+      ['img/wx_05.jpg', 'Art collaboration across both schools'],
+      ['img/wx_07.jpg', 'Performances and artistic collaboration'],
+      ['img/wx_10.jpg', 'A memorable afternoon for both schools'],
+      ['img/wx_11.jpg', 'Fostering understanding, forging friendship']
+    ];
+    more.forEach(function (p) {
+      var fig = document.createElement('figure');
+      fig.innerHTML = '<img src="' + p[0] + '" alt="' + p[1] + '" loading="lazy"><figcaption>' + p[1] + '</figcaption>';
+      gallery.appendChild(fig);
+    });
   }
 });
