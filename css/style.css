@@ -545,3 +545,103 @@ a:hover { text-decoration: underline; }
   .site-header, .site-footer, .hero-actions { display: none; }
   body { background: white; }
 }
+
+/* ============================================
+   Premium effects — subtle, ASD-friendly
+   (no flashing; honors prefers-reduced-motion)
+   ============================================ */
+
+/* Scroll reveal (only animated when JS is active) */
+.js .reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s cubic-bezier(0.22, 0.61, 0.36, 1),
+              transform 0.7s cubic-bezier(0.22, 0.61, 0.36, 1);
+  will-change: opacity, transform;
+}
+.js .reveal.is-visible { opacity: 1; transform: none; }
+
+/* Sticky header → frosted glass on scroll */
+.site-header { transition: background-color 0.35s ease, box-shadow 0.35s ease; }
+.site-header.is-scrolled {
+  background: rgba(74, 124, 181, 0.88);
+  -webkit-backdrop-filter: blur(14px) saturate(1.4);
+  backdrop-filter: blur(14px) saturate(1.4);
+  box-shadow: 0 6px 24px rgba(43, 58, 74, 0.18);
+}
+
+/* Cards: gentle lift on hover */
+.card, .campus-card, .past-card, .partner, .team-card, .how-item {
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .card:hover, .campus-card:hover, .past-card:hover,
+  .partner:hover, .team-card:hover, .how-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 16px 36px rgba(43, 58, 74, 0.14);
+  }
+}
+
+/* Image zoom inside cards */
+.campus-card .campus-photo, .gallery figure img, .past-card img {
+  transition: transform 0.65s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .campus-card:hover .campus-photo,
+  .gallery figure:hover img,
+  .past-card:hover img { transform: scale(1.045); }
+}
+.gallery figure { transition: box-shadow 0.35s ease; }
+@media (hover: hover) {
+  .gallery figure:hover { box-shadow: 0 12px 30px rgba(43, 58, 74, 0.22); }
+}
+
+/* Hero aurora — slow, gentle gradient drift */
+.hero { position: relative; }
+.hero-aurora {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: linear-gradient(115deg,
+    rgba(74, 124, 181, 0.30),
+    rgba(232, 200, 126, 0.20),
+    rgba(53, 96, 143, 0.28),
+    rgba(74, 124, 181, 0.30));
+  background-size: 300% 300%;
+  animation: aurora 18s ease-in-out infinite alternate;
+  pointer-events: none;
+}
+@keyframes aurora {
+  0%   { background-position: 0% 50%; }
+  100% { background-position: 100% 50%; }
+}
+.hero > .container { position: relative; z-index: 1; }
+
+/* Buttons micro-interaction */
+.btn { transition: transform 0.2s ease, box-shadow 0.25s ease, background-color 0.25s ease; }
+.btn:active { transform: scale(0.97); }
+
+/* Section-head underline accent */
+.section-head h2 { position: relative; }
+.section-head h2::after {
+  content: "";
+  display: block;
+  width: 44px;
+  height: 3px;
+  border-radius: 3px;
+  background: var(--gold);
+  margin-top: 10px;
+  transition: width 0.5s ease;
+}
+.js .section-head.reveal.is-visible h2::after { width: 64px; }
+.section-head.text-center h2::after { margin-left: auto; margin-right: auto; }
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .js .reveal { opacity: 1 !important; transform: none !important; transition: none !important; }
+  .hero-aurora { animation: none !important; }
+  .card, .campus-card, .past-card, .partner, .team-card, .how-item { transition: none !important; }
+  .campus-card .campus-photo, .gallery figure img, .past-card img { transition: none !important; }
+  .section-head h2::after { transition: none !important; }
+}

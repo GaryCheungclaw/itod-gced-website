@@ -123,3 +123,65 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 });
+
+/* ===== Premium interactions (ASD-friendly, reduced-motion aware) ===== */
+document.documentElement.classList.add('js');
+
+(function () {
+  var reduceMotion = window.matchMedia &&
+    window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // Stagger children inside .stagger grids, then reveal all
+  document.querySelectorAll('.stagger').forEach(function (grid) {
+    Array.prototype.forEach.call(grid.children, function (child, idx) {
+      child.classList.add('reveal');
+      child.style.transitionDelay = ((idx % 6) * 70) + 'ms';
+    });
+  });
+
+  var revealEls = document.querySelectorAll('.reveal');
+  function show(el) { el.classList.add('is-visible'); }
+
+  if (!reduceMotion && 'IntersectionObserver' in window && revealEls.length) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) { show(entry.target); io.unobserve(entry.target); }
+      });
+    }, { threshold: 0.01, rootMargin: '0px 0px -6% 0px' });
+    revealEls.forEach(function (el) { io.observe(el); });
+  } else {
+    revealEls.forEach(show);
+  }
+
+  // Animated stat counters (count up when scrolled into view)
+  var statNums = document.querySelectorAll('.stat-num[data-count]');
+  function countUp(el) {
+    var target = parseInt(el.getAttribute('data-count'), 10) || 0;
+    var suffix = el.getAttribute('data-suffix') || '';
+    var dur = 1200, start = null;
+    function frame(ts) {
+      if (!start) start = ts;
+      var p = Math.min((ts - start) / dur, 1);
+      var eased = 1 - Math.pow(1 - p, 3);
+      el.textContent = Math.round(eased * target) + suffix;
+      if (p < 1) requestAnimationFrame(frame);
+    }
+    requestAnimationFrame(frame);
+  }
+  if (!reduceMotion && statNums.length && 'IntersectionObserver' in window) {
+    var io2 = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) { countUp(entry.target); io2.unobserve(entry.target); }
+      });
+    }, { threshold: 0.4 });
+    statNums.forEach(function (el) { io2.observe(el); });
+  }
+
+  // Frosted header on scroll
+  var header = document.querySelector('.site-header');
+  if (header) {
+    var onScroll = function () { header.classList.toggle('is-scrolled', window.scrollY > 10); };
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+  }
+})();
