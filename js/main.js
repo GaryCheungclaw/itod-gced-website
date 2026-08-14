@@ -185,3 +185,182 @@ document.documentElement.classList.add('js');
     window.addEventListener('scroll', onScroll, { passive: true });
   }
 })();
+
+/* ===== v1.7: cinematic scroll layer ===== */
+(function () {
+  var reduceMotion = window.matchMedia &&
+    window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var isTouch = window.matchMedia &&
+    window.matchMedia('(hover: none)').matches;
+  var smoothActive = !reduceMotion && !isTouch;
+
+  // --- Infinite marquee fill (2 identical copies for seamless loop) ---
+  var track = document.getElementById('marquee-track');
+  if (track) {
+    var phrases = ['Indifferent to Difference', 'Autism Awareness',
+                   'Inclusion in Action', 'Service & Advocacy'];
+    var build = function () {
+      var frag = document.createDocumentFragment();
+      phrases.forEach(function (p) {
+        var s = document.createElement('span');
+        s.className = 'marquee-item'; s.textContent = p;
+        var sep = document.createElement('span');
+        sep.className = 'marquee-sep'; sep.textContent = '\u2726';
+        frag.appendChild(s); frag.appendChild(sep);
+      });
+      return frag;
+    };
+    track.appendChild(build());
+    track.appendChild(build());
+  }
+
+  // --- Headline word-mask reveal ---
+  var wordEls = document.querySelectorAll('.words-reveal');
+  wordEls.forEach(function (el) {
+    var text = el.textContent.trim().replace(/\s+/g, ' ');
+    el.setAttribute('aria-label', text);
+    el.textContent = '';
+    text.split(' ').forEach(function (w, i) {
+      var span = document.createElement('span');
+      span.className = 'word';
+      var inner = document.createElement('span');
+      inner.className = 'word-inner';
+      inner.textContent = w;
+      inner.style.transitionDelay = (i * 55) + 'ms';
+      span.appendChild(inner);
+      el.appendChild(span);
+      if (i < text.split(' ').length - 1) el.appendChild(document.createTextNode(' '));
+    });
+  });
+  function showWords(el) { el.classList.add('is-visible'); }
+  if (!reduceMotion && wordEls.length && 'IntersectionObserver' in window) {
+    var iw = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (en.isIntersecting) { showWords(en.target); iw.unobserve(en.target); }
+      });
+    }, { threshold: 0.35 });
+    wordEls.forEach(function (el) {
+      if (el.closest('.hero, .page-hero')) {
+        // page hero: animate on load (double rAF so the masked state paints first)
+        requestAnimationFrame(function () {
+          requestAnimationFrame(function () { showWords(el); });
+        });
+      } else {
+        iw.observe(el);
+      }
+    });
+  } else {
+    wordEls.forEach(showWords);
+  }
+
+  // --- Gallery figures reveal when their image loads ---
+  function wireFigure(img) {
+    var fig = img.closest('figure');
+    if (!fig || fig.classList.contains('reveal')) return;
+    fig.classList.add('reveal');
+    var showFig = function () { fig.classList.add('is-visible'); };
+    if (img.complete && img.naturalWidth > 0) showFig();
+    else img.addEventListener('load', showFig);
+  }
+  document.querySelectorAll('.gallery figure img').forEach(wireFigure);
+  if ('MutationObserver' in window) {
+    var mo = new MutationObserver(function (muts) {
+      muts.forEach(function (m) {
+        m.addedNodes.forEach(function (n) {
+          if (n.nodeType !== 1) return;
+          if (n.matches && n.matches('.gallery figure img')) wireFigure(n);
+          if (n.querySelectorAll) n.querySelectorAll('.gallery figure img').forEach(wireFigure);
+        });
+      });
+    });
+    mo.observe(document.body, { childList: true, subtree: true });
+  }
+  var figs = document.querySelectorAll('.gallery figure.reveal');
+  figs.forEach(function (f, i) { f.style.transitionDelay = ((i % 10) * 45) + 'ms'; });
+
+  // --- One rAF loop: smooth scroll + progress bar + parallax ---
+  var parallaxEls = document.querySelectorAll('.parallax');
+  var bar = document.querySelector('.scroll-progress');
+  var target = window.scrollY, current = target, raf = null, frameCount = 0;
+
+  function maxScroll() {
+    return Math.max(0, document.documentElement.scrollHeight - window.innerHeight);
+  }
+
+  function tick() {
+    raf = requestAnimationFrame(tick);
+    if (document.hidden) return;
+    frameCount++;
+    var y = window.scrollY;
+    if (smoothActive) {
+      if (Math.abs(y - current) > 2) {
+        // native scroll won (scrollbar / keyboard / touch) — resync
+        current = y; target = y;
+      } else {
+        current += (target - current) * 0.11;
+        if (Math.abs(target - current) < 0.4) current = target;
+        if (Math.abs(current - y) > 0.2) window.scrollTo(0, current);
+      }
+    }
+    if (bar) bar.style.width = (y / maxScroll() * 100) + '%';
+    // Safety net: fast jumps (scrollbar drag, End key) can skip IntersectionObserver
+    if (frameCount % 20 === 0) {
+      var vh2 = window.innerHeight;
+      for (var wi = 0; wi < wordEls.length; wi++) {
+        var w = wordEls[wi];
+        if (w.classList.contains('is-visible')) continue;
+        var wr = w.getBoundingClientRect();
+        if (wr.top < vh2 * 0.9 && wr.bottom > 0) showWords(w);
+      }
+    }
+    var vh = window.innerHeight;
+    for (var i = 0; i < parallaxEls.length; i++) {
+      var el = parallaxEls[i];
+      var r = el.parentElement.getBoundingClientRect();
+      if (r.bottom < -80 || r.top > vh + 80) continue;
+      var rate = parseFloat(el.getAttribute('data-rate') || '-0.15');
+      el.style.transform = 'translate3d(0,' + Math.round(r.top * rate) + 'px,0) scale(1.15)';
+    }
+  }
+
+  if (smoothActive) {
+    document.documentElement.style.scrollBehavior = 'auto';
+    // nav anchor links glide instead of jumping
+    document.querySelectorAll('a[href^="#"]').forEach(function (a) {
+      a.addEventListener('click', function (e) {
+        var id = a.getAttribute('href').slice(1);
+        var el = id && document.getElementById(id);
+        if (!el) return;
+        e.preventDefault();
+        target = Math.max(0, el.getBoundingClientRect().top + window.scrollY - 80);
+        if (!raf) raf = requestAnimationFrame(tick);
+      });
+    });
+    // wheel → lerped target (ctrlKey wheel = pinch zoom, leave alone)
+    window.addEventListener('wheel', function (e) {
+      if (e.ctrlKey) return;
+      var d = e.deltaY;
+      if (e.deltaMode === 1) d *= 16;
+      else if (e.deltaMode === 2) d *= window.innerHeight;
+      target = Math.max(0, Math.min(maxScroll(), target + d));
+      e.preventDefault();
+      if (!raf) raf = requestAnimationFrame(tick);
+    }, { passive: false });
+  }
+
+  if (smoothActive || bar || parallaxEls.length) raf = requestAnimationFrame(tick);
+
+  // --- Magnetic buttons (desktop pointer only) ---
+  if (!reduceMotion && !isTouch && window.matchMedia('(pointer: fine)').matches) {
+    document.querySelectorAll('.btn, .brand').forEach(function (el) {
+      el.addEventListener('mousemove', function (e) {
+        var r = el.getBoundingClientRect();
+        var dx = e.clientX - (r.left + r.width / 2);
+        var dy = e.clientY - (r.top + r.height / 2);
+        el.style.transform = 'translate(' + (dx * 0.14).toFixed(1) + 'px,' +
+                             (dy * 0.14).toFixed(1) + 'px)';
+      });
+      el.addEventListener('mouseleave', function () { el.style.transform = ''; });
+    });
+  }
+})();

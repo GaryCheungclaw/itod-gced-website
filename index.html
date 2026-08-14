@@ -8,6 +8,7 @@
   <link rel="icon" type="image/png" href="img/logo_blue.png">
   <link rel="stylesheet" href="css/style.css">
 </head>
+  <div class="scroll-progress" aria-hidden="true"></div>
 <body>
 
   <header class="site-header">
@@ -33,19 +34,23 @@
 
   <main>
     <section class="hero">
-      <div class="hero-bg" style="background-image:url('img/image1.jpg');"></div>
+      <div class="hero-bg parallax" data-rate="-0.35" style="background-image:url('img/image1.jpg');"></div>
       <div class="hero-aurora" aria-hidden="true"></div>
       <div class="container">
-        <div class="hero-content reveal">
-          <h1>Indifferent to Difference</h1>
-          <p class="lead">Itod GCED · AISG Service Club — supporting autistic youth in Guangzhou through hands-on service, campus advocacy and long-term partnership.</p>
-          <div class="hero-actions">
+        <div class="hero-content">
+          <h1 class="hero-title words-reveal">Indifferent to Difference</h1>
+          <p class="lead reveal" style="transition-delay:.25s">Itod GCED · AISG Service Club — supporting autistic youth in Guangzhou through hands-on service, campus advocacy and long-term partnership.</p>
+          <div class="hero-actions reveal" style="transition-delay:.45s">
             <a class="btn btn-light" href="about.html">Learn About Us</a>
             <a class="btn btn-outline" href="activities.html">Upcoming Events</a>
           </div>
         </div>
       </div>
     </section>
+
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee-track" id="marquee-track"></div>
+    </div>
 
     <section class="section">
       <div class="container">
@@ -61,8 +66,8 @@
     <section class="section section-alt">
       <div class="container">
         <div class="section-head text-center">
-          <h2>What We Stand For</h2>
-          <p class="section-intro" style="margin-left:auto;margin-right:auto;">We don't just fundraise — we go to the front line and interact with autistic individuals face to face.</p>
+          <h2 class="words-reveal">What We Stand For</h2>
+          <p class="section-intro reveal" style="margin-left:auto;margin-right:auto;">We don't just fundraise — we go to the front line and interact with autistic individuals face to face.</p>
         </div>
         <div class="card-grid">
           <div class="card pillar">
@@ -85,11 +90,11 @@
     </section>
 
     <section class="photo-section">
-      <div class="photo-bg" style="background-image:url('img/image10.jpg');"></div>
+      <div class="photo-bg parallax" data-rate="-0.15" style="background-image:url('img/image10.jpg');"></div>
       <div class="container">
         <div class="section-head">
-          <h2>Why "Indifferent to Difference"?</h2>
-          <p class="section-intro">Because difference should never be a reason for exclusion.</p>
+          <h2 class="words-reveal">Why "Indifferent to Difference"?</h2>
+          <p class="section-intro reveal">Because difference should never be a reason for exclusion.</p>
         </div>
         <div class="card-grid" style="grid-template-columns:repeat(auto-fit,minmax(300px,1fr));">
           <div style="background:rgba(255,255,255,0.10);border:1px solid rgba(255,255,255,0.25);border-radius:12px;padding:26px;">
@@ -107,9 +112,9 @@
 
     <section class="section">
       <div class="container">
-        <div class="section-head reveal">
-          <h2>How We Serve</h2>
-          <p class="section-intro">Four ways our club turns awareness into action, all year round.</p>
+        <div class="section-head">
+          <h2 class="words-reveal">How We Serve</h2>
+          <p class="section-intro reveal">Four ways our club turns awareness into action, all year round.</p>
         </div>
         <div class="how-grid stagger reveal">
           <div class="how-item">
@@ -147,8 +152,8 @@
     <section class="section section-alt">
       <div class="container">
         <div class="section-head">
-          <h2>This Year's Activities</h2>
-          <p class="section-intro">Five events across the year — three on campus, two with our partner schools.</p>
+          <h2 class="words-reveal">This Year's Activities</h2>
+          <p class="section-intro reveal">Five events across the year — three on campus, two with our partner schools.</p>
         </div>
         <ol class="timeline" id="event-timeline">
           <!-- rendered from data/events.json -->
@@ -158,9 +163,9 @@
 
     <section class="section">
       <div class="container">
-        <div class="section-head reveal">
-          <h2>Past Highlights</h2>
-          <p class="section-intro">Moments from our two campuses and our partner-school activities.</p>
+        <div class="section-head">
+          <h2 class="words-reveal">Past Highlights</h2>
+          <p class="section-intro reveal">Moments from our two campuses and our partner-school activities.</p>
         </div>
         <div class="campus-grid stagger reveal">
           <div class="campus-card">
@@ -190,11 +195,11 @@
     </section>
 
     <section class="photo-section">
-      <div class="photo-bg" style="background-image:url('img/image5.jpg');"></div>
+      <div class="photo-bg parallax" data-rate="-0.15" style="background-image:url('img/image5.jpg');"></div>
       <div class="container">
-        <div class="section-head reveal">
-          <h2>Our Outings in Pictures</h2>
-          <p class="section-intro">A look back at the venues and activities from our inclusive trips — every outing is a chance to connect.</p>
+        <div class="section-head">
+          <h2 class="words-reveal">Our Outings in Pictures</h2>
+          <p class="section-intro reveal">A look back at the venues and activities from our inclusive trips — every outing is a chance to connect.</p>
         </div>
         <div class="gallery reveal" id="photo-gallery">
           <!-- rendered from js/main.js -->

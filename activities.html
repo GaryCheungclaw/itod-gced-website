@@ -8,6 +8,7 @@
   <link rel="icon" type="image/png" href="img/logo_blue.png">
   <link rel="stylesheet" href="css/style.css">
 </head>
+  <div class="scroll-progress" aria-hidden="true"></div>
 <body>
 
   <header class="site-header">
@@ -33,17 +34,17 @@
 
   <main>
     <section class="page-hero">
-      <div class="photo-bg" style="background-image:url('img/image8.jpg');"></div>
+      <div class="photo-bg parallax" data-rate="-0.15" style="background-image:url('img/image8.jpg');"></div>
       <div class="container">
-        <h1>Activities</h1>
+        <h1 class="words-reveal">Activities</h1>
         <p>This year's calendar and highlights from past years. All service events count toward CAS hours.</p>
       </div>
     </section>
 
     <section class="section">
       <div class="container">
-        <h2>Upcoming Events · 2026–2027</h2>
-        <p class="section-intro">Three on-campus events and two with our partner schools. Dates and campuses will be confirmed and updated here.</p>
+        <h2 class="words-reveal">Upcoming Events · 2026–2027</h2>
+        <p class="section-intro reveal">Three on-campus events and two with our partner schools. Dates and campuses will be confirmed and updated here.</p>
         <div class="card-grid stagger reveal" id="upcoming-events">
           <!-- rendered from data/events.json -->
         </div>
@@ -52,8 +53,8 @@
 
     <section class="section section-alt">
       <div class="container">
-        <h2>Past Highlights</h2>
-        <p class="section-intro">A look back at what we've done — real photos from real trips and booths.</p>
+        <h2 class="words-reveal">Past Highlights</h2>
+        <p class="section-intro reveal">A look back at what we've done — real photos from real trips and booths.</p>
         <div class="gallery reveal" id="past-gallery">
           <!-- rendered from data/events.json -->
         </div>

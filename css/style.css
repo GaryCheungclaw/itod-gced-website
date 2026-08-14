@@ -633,7 +633,7 @@ a:hover { text-decoration: underline; }
   margin-top: 10px;
   transition: width 0.5s ease;
 }
-.js .section-head.reveal.is-visible h2::after { width: 64px; }
+.js .words-reveal.is-visible::after { width: 64px; }
 .section-head.text-center h2::after { margin-left: auto; margin-right: auto; }
 
 /* Respect reduced motion */
@@ -644,4 +644,82 @@ a:hover { text-decoration: underline; }
   .card, .campus-card, .past-card, .partner, .team-card, .how-item { transition: none !important; }
   .campus-card .campus-photo, .gallery figure img, .past-card img { transition: none !important; }
   .section-head h2::after { transition: none !important; }
+}
+
+/* ============================================
+   v1.7 — cinematic scroll layer (ASD-friendly)
+   ============================================ */
+
+/* Scroll reading progress bar */
+.scroll-progress {
+  position: fixed;
+  top: 0; left: 0;
+  height: 3px; width: 0;
+  background: linear-gradient(90deg, var(--gold), var(--blue));
+  z-index: 300;
+  pointer-events: none;
+}
+
+/* Infinite marquee strip */
+.marquee {
+  overflow: hidden;
+  background: var(--blue);
+  color: var(--white);
+  padding: 15px 0;
+  border-top: 1px solid rgba(255,255,255,0.15);
+  border-bottom: 1px solid rgba(255,255,255,0.15);
+}
+.marquee-track {
+  display: flex;
+  align-items: center;
+  width: max-content;
+  white-space: nowrap;
+  animation: marquee 42s linear infinite;
+  will-change: transform;
+}
+.marquee:hover .marquee-track { animation-play-state: paused; }
+.marquee-item {
+  font-size: 25px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0 16px;
+}
+.marquee-sep { color: var(--gold); font-size: 17px; }
+@keyframes marquee { to { transform: translateX(-50%); } }
+
+/* Headline word-mask reveal */
+.words-reveal .word {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: top;
+  padding-bottom: 0.12em;
+  margin-bottom: -0.12em;
+}
+.words-reveal .word-inner {
+  display: inline-block;
+  transform: translateY(115%);
+  transition: transform 0.85s cubic-bezier(0.22, 0.61, 0.36, 1);
+  will-change: transform;
+}
+.js .words-reveal.is-visible .word-inner { transform: translateY(0); }
+
+/* Parallax layers (transform set by JS; scale prevents edge gaps) */
+.parallax { will-change: transform; }
+
+/* Gallery figures: reveal when their image finishes loading */
+.gallery figure.reveal {
+  opacity: 0;
+  transform: translateY(16px) scale(0.98);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.gallery figure.reveal.is-visible { opacity: 1; transform: none; }
+
+/* Reduced motion: everything static */
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track { animation: none !important; }
+  .js .words-reveal .word-inner { transform: none !important; transition: none !important; }
+  .scroll-progress { display: none; }
+  .parallax { transform: none !important; }
+  .gallery figure.reveal { opacity: 1 !important; transform: none !important; transition: none !important; }
 }
