@@ -60,5 +60,27 @@ document.addEventListener('DOMContentLoaded', function () {
       fig.innerHTML = '<img src="' + p[0] + '" alt="' + p[1] + '" loading="lazy"><figcaption>' + p[1] + '</figcaption>';
       gallery.appendChild(fig);
     });
+
+    // Our founding years — from AISG's Community Service Spotlight article
+    var history = [
+      ['img/a3_1.jpg', 'Our founding years — the very beginning'],
+      ['img/a3_2.jpg', 'Our founding years — building the group'],
+      ['img/a3_3.jpg', 'Our founding years — first events'],
+      ['img/a3_4.jpg', 'Staying flexible during COVID'],
+      ['img/a3_5.jpg', 'Pandemic-era outreach continued'],
+      ['img/a3_6.jpg', 'Adapting our activities'],
+      ['img/a3_7.jpg', 'Small groups, big heart'],
+      ['img/a3_8.jpg', 'Keeping the connection alive'],
+      ['img/a3_9.jpg', 'Experience the Difference — events open to all'],
+      ['img/a3_10.jpg', 'Experience the Difference — welcoming everyone'],
+      ['img/a2_1.jpg', 'Caring in Action month, April'],
+      ['img/a2_2.jpg', 'Acts of kindness across campus'],
+      ['img/a2_3.jpg', 'Kindness in action']
+    ];
+    history.forEach(function (p) {
+      var fig = document.createElement('figure');
+      fig.innerHTML = '<img src="' + p[0] + '" alt="' + p[1] + '" loading="lazy"><figcaption>' + p[1] + '</figcaption>';
+      gallery.appendChild(fig);
+    });
   }
 });
