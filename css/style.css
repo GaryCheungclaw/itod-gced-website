@@ -334,15 +334,76 @@ a:hover { text-decoration: underline; }
 .myth-box .fact { margin-top: 4px; }
 
 .quote-block {
-  background: var(--blue);
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(165deg, #16233D 0%, #24375C 55%, #31496F 100%);
   color: var(--white);
-  border-radius: var(--radius);
-  padding: 36px;
+  border-radius: 18px;
+  padding: 58px 48px 54px;
   text-align: center;
   margin: 40px 0;
+  box-shadow: 0 14px 34px rgba(22, 35, 61, 0.28);
 }
-.quote-block p { font-size: 22px; font-style: italic; line-height: 1.6; }
-.quote-block cite { display: block; margin-top: 12px; font-style: normal; opacity: 0.85; font-size: 15px; }
+.quote-block .qb-inner { position: relative; z-index: 2; }
+.quote-block p {
+  font-size: 23px;
+  font-style: italic;
+  line-height: 1.7;
+  max-width: 780px;
+  margin: 0 auto;
+  text-shadow: 0 1px 14px rgba(10, 20, 40, 0.45);
+}
+.quote-block p em { color: var(--gold); font-style: italic; }
+.quote-block cite {
+  display: block;
+  margin-top: 16px;
+  font-style: normal;
+  opacity: 0.92;
+  font-size: 15px;
+  letter-spacing: 0.5px;
+  text-shadow: 0 1px 10px rgba(10, 20, 40, 0.5);
+}
+.quote-block cite::before { content: "✦ "; color: var(--gold); }
+
+/* night-sky stars & clouds for the quote block */
+.qb-star {
+  position: absolute;
+  border-radius: 50%;
+  animation: qb-twinkle 4.5s ease-in-out infinite;
+  will-change: opacity;
+}
+@keyframes qb-twinkle {
+  0%, 100% { opacity: 0.22; }
+  50%      { opacity: 0.95; }
+}
+.qb-cloud {
+  position: absolute;
+  z-index: 1;
+  pointer-events: none;
+  border-radius: 50%;
+  filter: blur(7px);
+}
+.qb-cloud-1 {
+  left: -60px;
+  bottom: -30px;
+  width: 340px;
+  height: 110px;
+  background: radial-gradient(ellipse at center, rgba(255,255,255,0.10), rgba(255,255,255,0) 72%);
+}
+.qb-cloud-2 {
+  right: -80px;
+  bottom: -48px;
+  width: 440px;
+  height: 140px;
+  background: radial-gradient(ellipse at center, rgba(232,200,126,0.09), rgba(255,255,255,0) 72%);
+}
+@media (prefers-reduced-motion: reduce) {
+  .qb-star { animation: none; opacity: 0.85; }
+}
+@media (max-width: 640px) {
+  .quote-block { padding: 44px 22px 40px; }
+  .quote-block p { font-size: 20px; }
+}
 
 /* ---------- Photo gallery ---------- */
 .gallery {

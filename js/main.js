@@ -489,4 +489,23 @@ document.documentElement.classList.add('js');
       });
     });
   }
+
+  // --- Night-sky stars for the quote block (index only) ---
+  var sky = document.getElementById('quote-sky');
+  if (sky) {
+    var starColors = ['#FFFFFF', '#E8C87E', '#BFD7EF'];
+    var starCount = 42;
+    for (var s = 0; s < starCount; s++) {
+      var star = document.createElement('span');
+      star.className = 'qb-star';
+      star.style.left = (Math.random() * 100).toFixed(2) + '%';
+      star.style.top = (Math.random() * 100).toFixed(2) + '%';
+      var sz = (Math.random() * 1.8 + 1).toFixed(1);
+      star.style.width = sz + 'px';
+      star.style.height = sz + 'px';
+      star.style.background = starColors[Math.floor(Math.random() * starColors.length)];
+      star.style.animationDelay = (-Math.random() * 4.5).toFixed(2) + 's';
+      sky.insertBefore(star, sky.firstChild);
+    }
+  }
 })();
