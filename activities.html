@@ -111,14 +111,16 @@
         var up = document.getElementById('upcoming-events');
         if (up) {
           data.events.forEach(function (ev) {
-            var div = document.createElement('div');
-            div.className = 'card';
-            div.innerHTML =
+            var a = document.createElement('a');
+            a.className = 'card event-card-link';
+            a.href = 'activity.html?id=' + encodeURIComponent(ev.id);
+            a.innerHTML =
               '<div class="event-date" style="font-size:13px;font-weight:700;color:var(--blue-dark);text-transform:uppercase;letter-spacing:0.5px;">' + ev.date + '</div>' +
               '<h3 style="margin-top:6px;">' + ev.name + '</h3>' +
               '<div style="font-size:14px;color:var(--ink-soft);margin:4px 0;">📍 ' + ev.campus + ' · ' + ev.type + '</div>' +
-              '<p>' + ev.desc + '</p>';
-            up.appendChild(div);
+              '<p>' + ev.desc + '</p>' +
+              '<span class="learn-more">Learn more →</span>';
+            up.appendChild(a);
           });
         }
         var gal = document.getElementById('past-gallery');
@@ -142,17 +144,18 @@
         var up = document.getElementById('upcoming-events');
         if (up) {
           var fallback = [
-            ['Family Fun Day — Charity Booth', 'Our first on-campus fundraising event.'],
-            ['ImpactGZ Service Learning Summit', 'Partner school booths and workshops.'],
-            ['Lingnan Campus Visit', 'Inclusive activities with autistic students.'],
-            ['Holiday Bazaar', 'Year-end fundraising market.'],
-            ['International Day', 'Campus awareness day.']
+            ['family-fun-day', 'Family Fun Day — Charity Booth', 'Our first on-campus fundraising event.'],
+            ['impactgz-summit', 'ImpactGZ Service Learning Summit', 'Partner school booths and workshops.'],
+            ['lingnan-visit', 'Lingnan Campus Visit', 'Inclusive activities with autistic students.'],
+            ['holiday-bazaar', 'Holiday Bazaar', 'Year-end fundraising market.'],
+            ['international-day', 'International Day', 'Campus awareness day.']
           ];
           fallback.forEach(function (ev) {
-            var div = document.createElement('div');
-            div.className = 'card';
-            div.innerHTML = '<h3>' + ev[0] + '</h3><p>' + ev[1] + '</p>';
-            up.appendChild(div);
+            var a = document.createElement('a');
+            a.className = 'card event-card-link';
+            a.href = 'activity.html?id=' + ev[0];
+            a.innerHTML = '<h3>' + ev[1] + '</h3><p>' + ev[2] + '</p><span class="learn-more">Learn more →</span>';
+            up.appendChild(a);
           });
         }
       });

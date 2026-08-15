@@ -822,3 +822,92 @@ a:hover { text-decoration: underline; }
 @media (prefers-reduced-motion: reduce) {
   .cursor-glow { display: none; }
 }
+
+/* ============================================
+   Activity detail page (activity.html)
+   ============================================ */
+.hero-tag {
+  display: inline-block;
+  margin-bottom: 10px;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+.activity-layout {
+  display: grid;
+  grid-template-columns: 1fr 300px;
+  gap: 36px;
+  align-items: start;
+}
+.activity-main .lead {
+  font-size: 19.5px;
+  color: var(--ink);
+  font-weight: 500;
+  margin-bottom: 18px;
+}
+.activity-main h2 { margin: 30px 0 10px; font-size: 24px; }
+.activity-main p { margin-bottom: 14px; color: var(--ink-soft); }
+.activity-side { position: sticky; top: 100px; }
+.activity-fact h3 { font-size: 18px; margin-bottom: 6px; }
+.activity-fact > div {
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--ink-soft);
+  margin-top: 16px;
+}
+.activity-fact strong {
+  display: block;
+  margin-top: 2px;
+  font-size: 16px;
+  color: var(--ink);
+  font-weight: 600;
+}
+.loading-note { color: var(--ink-soft); }
+.activity-body { animation: act-fade 0.55s ease both; }
+@keyframes act-fade {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: none; }
+}
+@media (max-width: 860px) {
+  .activity-layout { grid-template-columns: 1fr; }
+  .activity-side { position: static; }
+}
+
+/* clickable activity cards / timeline items */
+.event-link {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  border-radius: 10px;
+  padding: 4px 6px 4px 2px;
+  margin: -4px 0 -4px -2px;
+  transition: background 0.25s ease, transform 0.25s ease;
+}
+.event-link:hover { background: rgba(74, 124, 181, 0.08); }
+.event-card-link {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+}
+.learn-more {
+  display: inline-block;
+  margin-top: 10px;
+  font-size: 14.5px;
+  font-weight: 700;
+  color: var(--blue-dark);
+  transition: transform 0.2s ease;
+}
+.event-link:hover .learn-more,
+.event-card-link:hover .learn-more {
+  transform: translateX(4px);
+}
+.event-card-link .learn-more { color: var(--blue); }
+@media (prefers-reduced-motion: reduce) {
+  .activity-body { animation: none; }
+  .event-link, .learn-more { transition: none; }
+}

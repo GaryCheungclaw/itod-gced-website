@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Activity | Itod GCED — Indifferent to Difference</title>
+  <meta name="description" content="What our service activities are really about — the events, the people and what members do.">
+  <link rel="icon" type="image/png" href="img/logo_blue.png">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="scroll-progress" aria-hidden="true"></div>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="index.html">
+        <img class="brand-logo" src="img/logo_white.png" alt="Itod GCED logo">
+        <span>
+          <span class="brand-name">Itod GCED</span><br>
+          <span class="brand-sub">Indifferent to Difference</span>
+        </span>
+      </a>
+      <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">☰</button>
+      <nav class="main-nav" aria-label="Main navigation">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="activities.html">Activities</a></li>
+          <li><a href="awareness.html">ASD Awareness</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="page-hero" id="act-hero">
+      <div class="photo-bg parallax" data-rate="-0.15" style="background-image:url('img/image8.jpg');"></div>
+      <div class="container">
+        <div class="hero-tag">Itod GCED · Activity</div>
+        <h1 class="words-reveal" id="act-title">Activity</h1>
+        <p id="act-sub">Loading…</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="activity-body" id="act-content">
+          <p class="loading-note">Loading activity details…</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <img src="img/logo_white.png" alt="Itod GCED logo" style="height:38px;width:auto;">
+        <span>Itod GCED — Indifferent to Difference</span>
+      </div>
+      <div class="footer-links">
+        <span>© 2026–2027 Itod GCED · AISG</span>
+        <span>Made with care · ASD-friendly design</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script>
+    (function () {
+      var params = new URLSearchParams(window.location.search);
+      var id = params.get('id');
+      var hero = document.getElementById('act-hero');
+      var titleEl = document.getElementById('act-title');
+      var subEl = document.getElementById('act-sub');
+      var contentEl = document.getElementById('act-content');
+
+      function setTitle(text) {
+        // rebuild with the same word-mask markup as .words-reveal, then reveal
+        titleEl.setAttribute('aria-label', text);
+        titleEl.textContent = '';
+        var words = text.split(' ');
+        words.forEach(function (w, i) {
+          var span = document.createElement('span');
+          span.className = 'word';
+          var inner = document.createElement('span');
+          inner.className = 'word-inner';
+          inner.textContent = w;
+          inner.style.transitionDelay = (i * 55) + 'ms';
+          span.appendChild(inner);
+          titleEl.appendChild(span);
+          if (i < words.length - 1) titleEl.appendChild(document.createTextNode(' '));
+        });
+        titleEl.classList.add('is-visible');
+      }
+
+      function esc(s) {
+        return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+          .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+      }
+
+      function renderNotFound() {
+        setTitle('Activity Not Found');
+        subEl.textContent = 'We could not find that activity.';
+        contentEl.innerHTML =
+          '<p style="color:var(--ink-soft);">The link may be outdated, or the activity may have been renamed. ' +
+          'Check the full list to find it.</p>' +
+          '<p style="margin-top:20px;"><a class="btn btn-blue" href="activities.html">← All Activities</a></p>';
+      }
+
+      fetch('data/events.json')
+        .then(function (r) { return r.json(); })
+        .then(function (data) {
+          var ev = null;
+          if (id) {
+            data.events.forEach(function (e) { if (e.id === id) ev = e; });
+          }
+          if (!ev) { renderNotFound(); return; }
+
+          // hero photo
+          if (ev.photo && hero) {
+            var bg = hero.querySelector('.photo-bg');
+            if (bg) bg.style.backgroundImage = "url('" + ev.photo + "')";
+          }
+          document.title = ev.name + ' | Itod GCED';
+          setTitle(ev.name);
+          subEl.textContent = ev.date + ' · ' + ev.type + ' · ' + ev.campus;
+
+          var html = '';
+          html += '<div class="activity-layout">';
+          html += '<div class="activity-main">';
+          html += '<p class="lead">' + esc(ev.desc) + '</p>';
+          (ev.detail || []).forEach(function (p) {
+            html += '<p>' + esc(p) + '</p>';
+          });
+          html += '<p style="margin-top:28px;"><a class="btn btn-blue" href="activities.html">← All Activities</a></p>';
+          html += '</div>';
+          html += '<aside class="activity-side">';
+          html += '<div class="card activity-fact">';
+          html += '<h3>At a glance</h3>';
+          html += '<div>📅 When</div><strong>' + esc(ev.date) + '</strong>';
+          html += '<div>📍 Where</div><strong>' + esc(ev.campus) + '</strong>';
+          html += '<div>🏷️ Type</div><strong>' + esc(ev.type) + '</strong>';
+          html += '<div>🎓 CAS</div><strong>Counts as service hours</strong>';
+          html += '</div>';
+          html += '</aside>';
+          html += '</div>';
+
+          contentEl.innerHTML = html;
+        })
+        .catch(function () { renderNotFound(); });
+    })();
+  </script>
+</body>
+</html>

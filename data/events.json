@@ -1,43 +1,78 @@
 {
   "events": [
     {
+      "id": "family-fun-day",
       "name": "Family Fun Day — Charity Booth",
       "date": "Semester 1 · TBD",
       "type": "On-campus · Fundraising",
       "campus": "Science City or Ersha Island",
       "desc": "Our first on-campus event of the year: a games booth raising funds for local ASD programs.",
+      "photo": "img/image8.jpg",
+      "detail": [
+        "Family Fun Day is one of AISG's biggest community celebrations, and Itod GCED runs its own charity booth right in the middle of it. We design and host carnival-style games — ring toss, lucky draws and more — that families play for a small donation.",
+        "Every dollar raised goes to local autism support programs and partner organisations in Guangzhou, so the games we run directly fund real services for the ASD community.",
+        "As a member you might run a game, manage the cash box, decorate the booth, or explain our cause to visitors. No experience needed — we train you on the day."
+      ],
       "status": "upcoming"
     },
     {
+      "id": "impactgz-summit",
       "name": "ImpactGZ Service Learning Summit",
       "date": "Semester 1 · TBD",
       "type": "Off-campus · Partnership",
       "campus": "Partner school",
       "desc": "We visit our partner school to run translation booths and lead inclusive workshops.",
+      "photo": "img/s7_21.jpg",
+      "detail": [
+        "The ImpactGZ Service Learning Summit is the annual gathering of AISG's GCED service leaders and our partner organisations. Our club runs two things there: translation booths that help visitors connect with partner groups, and inclusive workshops designed to be played together.",
+        "Our signature workshop, 'Joining Hands, Cracking the Code Together', features games like Water Fetch, Tower of Hanoi and Da Vinci Code — activities that are fun precisely because they need cooperation, not speed.",
+        "It's a chance to represent Itod GCED to the wider Guangzhou service community and to see what other schools and NGOs are doing for inclusion."
+      ],
       "status": "upcoming"
     },
     {
+      "id": "lingnan-visit",
       "name": "Lingnan Campus Visit",
       "date": "Semester 1 · TBD",
       "type": "Off-campus · Inclusive activities",
       "campus": "Partner school",
       "desc": "Full-team visit to Lingnan — cooking, sports and games with autistic students.",
+      "photo": "img/wx_05.jpg",
+      "detail": [
+        "We have a close partnership with Lingnan Modern Technician College (岭南现代技师学院), whose community includes many autistic students. Each visit we travel as a full team and spend the afternoon cooking, playing sports and doing games side by side with them.",
+        "The relationship works both ways: in 2026, 20 Lingnan students visited our Science City campus for a tour, an art collaboration and performances — and we regularly go to them for the same kind of shared day.",
+        "Members pair up as buddies for the afternoon — the simplest and most meaningful job in the club."
+      ],
       "status": "upcoming"
     },
     {
+      "id": "holiday-bazaar",
       "name": "Holiday Bazaar",
       "date": "Semester 2 · TBD",
       "type": "On-campus · Fundraising",
       "campus": "Science City or Ersha Island",
       "desc": "Year-end fundraising market with games and student-made goods.",
+      "photo": "img/image8.jpg",
+      "detail": [
+        "The Holiday Bazaar is our year-end fundraising market and a December tradition going back to the club's earliest years. We set up games stalls and sell student-made goods — from baked treats to crafts — with all proceeds going to local ASD support programs.",
+        "It's the club's biggest fundraising push of the year and a chance for the whole school community to get involved before the winter break.",
+        "Members help design the stalls, bake or craft the goods, run the games, and handle sales on the night."
+      ],
       "status": "upcoming"
     },
     {
+      "id": "international-day",
       "name": "International Day",
       "date": "Semester 2 · TBD",
       "type": "On-campus · Awareness",
       "campus": "Science City or Ersha Island",
       "desc": "Campus-wide awareness day celebrating neurodiversity and inclusion.",
+      "photo": "img/image10.jpg",
+      "detail": [
+        "International Day is a campus-wide celebration of the many cultures and identities at AISG — and for us, it's also a day to celebrate neurodiversity. Our booth shares what autism is (and isn't), with simple facts, stories and activities that invite curiosity instead of pity.",
+        "We join the celebration on both campuses across the year, making sure the message of inclusion is part of the biggest days on the school calendar.",
+        "Members take shifts at the booth explaining our work, running mini-games and handing out our awareness materials."
+      ],
       "status": "upcoming"
     }
   ],

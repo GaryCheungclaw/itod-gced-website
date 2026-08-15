@@ -267,10 +267,13 @@
           data.events.forEach(function (ev) {
             var li = document.createElement('li');
             li.innerHTML =
-              '<div class="event-date">' + ev.date + ' · ' + ev.type + '</div>' +
-              '<div class="event-name">' + ev.name + '</div>' +
-              '<div class="event-meta">📍 ' + ev.campus + '</div>' +
-              '<div class="event-desc">' + ev.desc + '</div>';
+              '<a class="event-link" href="activity.html?id=' + encodeURIComponent(ev.id) + '">' +
+                '<div class="event-date">' + ev.date + ' · ' + ev.type + '</div>' +
+                '<div class="event-name">' + ev.name + '</div>' +
+                '<div class="event-meta">📍 ' + ev.campus + '</div>' +
+                '<div class="event-desc">' + ev.desc + '</div>' +
+                '<span class="learn-more">Learn more →</span>' +
+              '</a>';
             list.appendChild(li);
           });
         }
@@ -294,15 +297,15 @@
         var list = document.getElementById('event-timeline');
         if (!list) return;
         var fallback = [
-          ['Family Fun Day — Charity Booth', 'Our first on-campus fundraising event of the year.'],
-          ['ImpactGZ Service Learning Summit', 'Visit partner school for booths and workshops.'],
-          ['Lingnan Campus Visit', 'Inclusive activities with autistic students.'],
-          ['Holiday Bazaar', 'Year-end fundraising market.'],
-          ['International Day', 'Campus awareness day for neurodiversity.']
+          ['family-fun-day', 'Family Fun Day — Charity Booth', 'Our first on-campus fundraising event of the year.'],
+          ['impactgz-summit', 'ImpactGZ Service Learning Summit', 'Visit partner school for booths and workshops.'],
+          ['lingnan-visit', 'Lingnan Campus Visit', 'Inclusive activities with autistic students.'],
+          ['holiday-bazaar', 'Holiday Bazaar', 'Year-end fundraising market.'],
+          ['international-day', 'International Day', 'Campus awareness day for neurodiversity.']
         ];
         fallback.forEach(function (ev) {
           var li = document.createElement('li');
-          li.innerHTML = '<div class="event-name">' + ev[0] + '</div><div class="event-desc">' + ev[1] + '</div>';
+          li.innerHTML = '<a class="event-link" href="activity.html?id=' + ev[0] + '"><div class="event-name">' + ev[1] + '</div><div class="event-desc">' + ev[2] + '</div><span class="learn-more">Learn more →</span></a>';
           list.appendChild(li);
         });
       });
