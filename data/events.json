@@ -17,23 +17,38 @@
     },
     {
       "id": "impactgz-summit",
-      "name": "ImpactGZ Service Learning Summit",
-      "date": "Semester 1 · TBD",
+      "name": "ImpactGZ Summit",
+      "date": "Nov 20–21",
       "type": "Off-campus · Partnership",
-      "campus": "Partner school",
-      "desc": "We visit our partner school to run translation booths and lead inclusive workshops.",
+      "campus": "Science City campus",
+      "desc": "Two-day summit — speakers, library booths, and inclusive workshops with our ASD partners.",
       "photo": "img/s7_21.jpg",
       "detail": [
-        "The ImpactGZ Service Learning Summit is the annual gathering of AISG's GCED service leaders and our partner organisations. Our club runs two things there: translation booths that help visitors connect with partner groups, and inclusive workshops designed to be played together.",
-        "Our signature workshop, 'Joining Hands, Cracking the Code Together', features games like Water Fetch, Tower of Hanoi and Da Vinci Code — activities that are fun precisely because they need cooperation, not speed.",
-        "It's a chance to represent Itod GCED to the wider Guangzhou service community and to see what other schools and NGOs are doing for inclusion."
+        "ImpactGZ is our flagship two-day summit of the year, running Friday afternoon through Saturday (Nov 20–21). We bring guest speakers to school, set up booths in the library, and run inclusive workshops side by side with students from our ASD partner schools.",
+        "Club members take on real roles across the two days: hosting sessions, translating for our partner guests, and inviting coordinators from partner organisations to share their experience with the school community.",
+        "It's our biggest chance of the year to show what inclusive service looks like — and to represent Itod GCED to the wider Guangzhou service community."
+      ],
+      "status": "upcoming"
+    },
+    {
+      "id": "charity-run",
+      "name": "45th Anniversary Charity Run",
+      "date": "Nov 15 · Sunday",
+      "type": "Off-campus · Fundraising",
+      "campus": "Ersha Island",
+      "desc": "Run 5 km side by side with our ASD and visually impaired friends at the school's 45th anniversary run.",
+      "photo": "img/s5_65.jpg",
+      "detail": [
+        "The school's 45th anniversary charity run takes over Ersha Island on Sunday, Nov 15 — and Itod GCED runs it together with our ASD and visually impaired friends. Runners are split into different groups, each pacing a 5 km course as a team.",
+        "Funds raised through the run count toward the club's service credit, making it both a community event and a real project for our members.",
+        "Members act as running buddies — pacing, encouraging and making sure everyone finishes together — and help organise the groups on the day."
       ],
       "status": "upcoming"
     },
     {
       "id": "lingnan-visit",
       "name": "Lingnan Campus Visit",
-      "date": "Semester 1 · TBD",
+      "date": "Spring 2027 · TBD",
       "type": "Off-campus · Inclusive activities",
       "campus": "Partner school",
       "desc": "Full-team visit to Lingnan — cooking, sports and games with autistic students.",
